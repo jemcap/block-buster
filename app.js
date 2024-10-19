@@ -55,7 +55,7 @@ function initialiseGame() {
     instructions.innerHTML = "";
     scores.style.display = "flex";
     gameActive = true;
-    generateRandomBlock(10);
+    generateRandomBlock(5);
     btn.remove();
   });
 }
@@ -97,7 +97,7 @@ function compare() {
     selectedSquares = [];
     activeSquares = [];
 
-    generateRandomBlock(10); // Generate new blocks if the player wins
+    generateRandomBlock(5); // Generate new blocks if the player wins
   } else {
     console.log("Selections incomplete");
   }
