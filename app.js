@@ -13,6 +13,7 @@ for (let i = 0; i < square * square; i++) {
   displayGrid.appendChild(squareItems);
   squareArr.push(squareItems);
   squareItems.addEventListener("click", (event) => {
+    event.target.style.backgroundColor = "red";
     if (!selectedSquares.includes(event.target)) {
       selectedSquares.push(event.target);
       compare();
@@ -32,7 +33,7 @@ function generateRandomBlock(num) {
       setTimeout(() => {
         let blockColor = (randomBlock.style.backgroundColor = "");
         return () => clearTimeout(blockColor);
-      }, 2000);
+      }, 5000);
       activeSquares.push(randomBlock);
       squareArr.splice(randomIdx, 1);
     }
