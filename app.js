@@ -29,6 +29,10 @@ function generateRandomBlock(num) {
     if (randomBlock) {
       randomBlock.classList.add("active-block");
       randomBlock.style.backgroundColor = "red";
+      setTimeout(() => {
+        let blockColor = (randomBlock.style.backgroundColor = "");
+        return () => clearTimeout(blockColor);
+      }, 2000);
       activeSquares.push(randomBlock);
       squareArr.splice(randomIdx, 1);
     }
@@ -36,7 +40,10 @@ function generateRandomBlock(num) {
 }
 
 function initialiseGame() {
-  btn.addEventListener("click", () => generateRandomBlock(10));
+  btn.addEventListener("click", () => {
+    generateRandomBlock(10);
+    btn.remove();
+  });
 }
 
 initialiseGame();
@@ -59,7 +66,6 @@ initialiseGame();
 function compare() {
   if (activeSquares.length === selectedSquares.length) {
     for (let i = 0; i < selectedSquares.length; i++) {
-      // Check if the selected square is in the activeSquares array
       if (!activeSquares.includes(selectedSquares[i])) {
         console.log("You lose");
         return;
