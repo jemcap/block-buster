@@ -30,6 +30,7 @@ function generateRandomBlock(num) {
       randomBlock.classList.add("active-block");
       randomBlock.style.backgroundColor = "red";
       activeSquares.push(randomBlock);
+      squareArr.splice(randomIdx, 1);
     }
   }
 }
@@ -65,8 +66,13 @@ function compare() {
       }
     }
     console.log("You win");
+    activeSquares.forEach((item) => {
+      item.classList.remove("active-block");
+      item.style.backgroundColor = "";
+    });
     selectedSquares = [];
     activeSquares = [];
+
     generateRandomBlock(10); // Generate new blocks if the player wins
   } else {
     console.log("Selections incomplete");
