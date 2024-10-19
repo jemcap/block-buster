@@ -1,5 +1,7 @@
 const displayGrid = document.getElementById("grid");
 const btn = document.getElementById("btn");
+const instructions = document.getElementById("instructions");
+const scores = document.getElementById("scores");
 
 const square = 10;
 let squareArr = [];
@@ -7,6 +9,8 @@ let activeSquares = [];
 let selectedSquares = [];
 
 let gameActive = false;
+
+let randomBlock;
 
 for (let i = 0; i < square * square; i++) {
   let squareItems = document.createElement("div");
@@ -48,6 +52,8 @@ function generateRandomBlock(num) {
 
 function initialiseGame() {
   btn.addEventListener("click", () => {
+    instructions.innerHTML = "";
+    scores.style.display = "flex";
     gameActive = true;
     generateRandomBlock(10);
     btn.remove();
@@ -75,6 +81,9 @@ function compare() {
   if (activeSquares.length === selectedSquares.length) {
     for (let i = 0; i < selectedSquares.length; i++) {
       if (!activeSquares.includes(selectedSquares[i])) {
+        activeSquares.forEach((item) => {
+          item.style.backgroundColor = "green";
+        });
         console.log("You lose");
         gameActive = false;
         return;
