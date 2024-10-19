@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -10,9 +12,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.container {
+  font-family: "Source Code Pro", sans-serif;
 }
 
 .content-container {
@@ -21,6 +21,10 @@ body {
   flex-direction: column;
   width: 100%;
   align-items: center;
+}
+
+.info {
+  text-align: center;
 }
 
 .grid {
@@ -45,4 +49,10 @@ body {
   text-align: center;
   font-size: 60px;
   line-height: 1.6;
+}
+
+.scores {
+  display: flex;
+  gap: 9em;
+  margin-top: 5em;
 }

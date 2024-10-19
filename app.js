@@ -6,6 +6,8 @@ let squareArr = [];
 let activeSquares = [];
 let selectedSquares = [];
 
+let gameActive = false;
+
 for (let i = 0; i < square * square; i++) {
   let squareItems = document.createElement("div");
   squareItems.classList.add("grid-item");
@@ -13,6 +15,8 @@ for (let i = 0; i < square * square; i++) {
   displayGrid.appendChild(squareItems);
   squareArr.push(squareItems);
   squareItems.addEventListener("click", (event) => {
+    if (!gameActive) return;
+
     event.target.style.backgroundColor = "red";
     if (!selectedSquares.includes(event.target)) {
       selectedSquares.push(event.target);
@@ -30,7 +34,9 @@ function generateRandomBlock(num) {
     if (randomBlock) {
       randomBlock.classList.add("active-block");
       randomBlock.style.backgroundColor = "red";
+      gameActive = false;
       setTimeout(() => {
+        gameActive = true;
         let blockColor = (randomBlock.style.backgroundColor = "");
         return () => clearTimeout(blockColor);
       }, 5000);
@@ -42,6 +48,7 @@ function generateRandomBlock(num) {
 
 function initialiseGame() {
   btn.addEventListener("click", () => {
+    gameActive = true;
     generateRandomBlock(10);
     btn.remove();
   });
@@ -69,6 +76,7 @@ function compare() {
     for (let i = 0; i < selectedSquares.length; i++) {
       if (!activeSquares.includes(selectedSquares[i])) {
         console.log("You lose");
+        gameActive = false;
         return;
       }
     }

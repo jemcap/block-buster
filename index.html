@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Memory Game</title>
 </head>
@@ -11,10 +15,20 @@
 <body>
     <div class="container">
         <div class="content-container">
-            <h1>Memory game</h1>
-            <p>You think you have good memory?</p>
+            <div class="info">
+                <h1>Memory game</h1>
+                <p>You think you have good memory?</p>
+            </div>
+
+            <div class="scores">
+                <p>Score: <span id="score">1</span></p>
+                <p>Round: <span id="round">1</span></p>
+                <p>Time: <span id="timer">1</span></p>
+            </div>
+
+
         </div>
-        <p id="result"></p>
+
         <div id="grid" class="grid"><!-- render the grid --></div>
         <button id="btn" class="btn">Start Game</button>
     </div>
