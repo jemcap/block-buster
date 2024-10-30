@@ -63,6 +63,7 @@ function initialiseGame() {
     scores.style.display = "flex";
     round.textContent = roundNum;
     scoreCount.textContent = score;
+    scoreCount.style.fontWeight = "bold";
     gameActive = true;
     generateRandomBlock(3);
     btn.remove();
