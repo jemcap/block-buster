@@ -7,7 +7,6 @@
 }
 
 body {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +15,7 @@ body {
 }
 
 .container {
+  height: 100%;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -76,7 +76,8 @@ h5 {
   margin-top: 5em;
 }
 
-.btn {
+.btn,
+.retry-btn {
   margin-top: 3.5em;
   background: #ff4742;
   border: 1px solid #ff4742;
@@ -102,7 +103,9 @@ h5 {
 }
 
 .btn:hover,
-.btn:active {
+.btn:active,
+.retry-btn:hover,
+.retry-btn:active {
   background-color: initial;
   background-position: 0 0;
   color: #ff4742;

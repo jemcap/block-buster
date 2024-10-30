@@ -59,7 +59,7 @@ function initialiseGame() {
     scores.style.display = "flex";
     round.textContent = roundNum;
     gameActive = true;
-    generateRandomBlock(5);
+    generateRandomBlock(3);
     btn.remove();
   });
 }
@@ -78,9 +78,12 @@ function compare() {
         <h2>Game Over</h2>
         <p>You have made it to round ${roundNum}</p>
         <button id="retry-btn">Retry</button>`;
-        document.getElementById("retry-btn").addEventListener("click", () => {
+        let retryBtn = document.getElementById("retry-btn");
+        retryBtn.classList.add("retry-btn");
+        retryBtn.addEventListener("click", () => {
           location.reload();
         });
+
         gameActive = false;
         return;
       }
@@ -95,7 +98,7 @@ function compare() {
     roundNum++;
     round.textContent = roundNum;
 
-    generateRandomBlock(5);
+    generateRandomBlock(3 + roundNum);
   }
 }
 
