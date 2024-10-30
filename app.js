@@ -79,8 +79,7 @@ function compare() {
         <p>You have made it to round ${roundNum}</p>
         <button id="retry-btn">Retry</button>`;
         document.getElementById("retry-btn").addEventListener("click", () => {
-          resetGame(); // Reset the game state
-          initialiseGame(); // Reinitialize the game
+          location.reload();
         });
         gameActive = false;
         return;
@@ -97,18 +96,7 @@ function compare() {
     round.textContent = roundNum;
 
     generateRandomBlock(5);
-
-    // Generate new blocks if the player wins
-  } else {
-    console.log("Selections incomplete");
   }
-}
-
-function resetGame() {
-  gameOver.style.visibility = "hidden"; // Hide game over message
-  selectedSquares = []; // Reset selected squares
-  activeSquares = []; // Reset active squares
-  initialiseGame();
 }
 
 console.log(activeSquares);
