@@ -10,6 +10,8 @@ const retryBtn = document.getElementById("retry-btn");
 
 const square = 10;
 let score = 0;
+let hiscore = localStorage.getItem("hiscore") || 0;
+
 let squareArr = [];
 let activeSquares = [];
 let selectedSquares = [];
@@ -81,12 +83,18 @@ function compare() {
         gameOver.innerHTML = `
         <h2>Game Over</h2>
         <p>You have made it to round ${roundNum}</p>
-        <h3>Hi-Score: <span>${score}</span></h3>
-        <form>
-          <label for="name">Name</label>
-          <input type="text" name="name"/>
-        </form>
+        <div><p id="new-hiscore"></p><h3>Hi-Score: <span>${hiscore}</span></h3></div>
         <button id="retry-btn">Retry</button>`;
+
+        if (score > hiscore) {
+          hiscore = score;
+          localStorage.setItem("hiscore", score);
+          let newHiScore = document.getElementById("new-hiscore");
+          newHiScore.classList.add("new-hi-score");
+          newHiScore.textContent = "New High Score!";
+          gameOver.querySelector("span").textContent = hiscore;
+        }
+
         let retryBtn = document.getElementById("retry-btn");
         retryBtn.classList.add("retry-btn");
         retryBtn.addEventListener("click", () => {

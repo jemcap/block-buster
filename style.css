@@ -83,6 +83,10 @@ h5 {
   margin-top: 5em;
 }
 
+.new-hi-score {
+  color: green;
+}
+
 .btn,
 .retry-btn {
   margin-top: 3.5em;
