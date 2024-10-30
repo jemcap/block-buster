@@ -13,8 +13,6 @@ let activeSquares = [];
 let selectedSquares = [];
 
 let gameActive = false;
-
-let randomBlock;
 let roundNum = 1;
 
 for (let i = 0; i < square * square; i++) {
@@ -48,7 +46,7 @@ function generateRandomBlock(num) {
         gameActive = true;
         let blockColor = (randomBlock.style.backgroundColor = "");
         return () => clearTimeout(blockColor);
-      }, 5000);
+      }, 3000);
       activeSquares.push(randomBlock);
       squareArr.splice(randomIdx, 1);
     }
@@ -66,8 +64,6 @@ function initialiseGame() {
   });
 }
 
-initialiseGame();
-
 function compare() {
   if (activeSquares.length === selectedSquares.length) {
     for (let i = 0; i < selectedSquares.length; i++) {
@@ -77,10 +73,15 @@ function compare() {
         });
         console.log("You lose");
         gameOver.style.visibility = "visible";
+
         gameOver.innerHTML = `
         <h2>Game Over</h2>
         <p>You have made it to round ${roundNum}</p>
         <button id="retry-btn">Retry</button>`;
+        document.getElementById("retry-btn").addEventListener("click", () => {
+          resetGame(); // Reset the game state
+          initialiseGame(); // Reinitialize the game
+        });
         gameActive = false;
         return;
       }
@@ -95,11 +96,22 @@ function compare() {
     roundNum++;
     round.textContent = roundNum;
 
+    generateRandomBlock(5);
+
     // Generate new blocks if the player wins
   } else {
     console.log("Selections incomplete");
   }
 }
 
+function resetGame() {
+  gameOver.style.visibility = "hidden"; // Hide game over message
+  selectedSquares = []; // Reset selected squares
+  activeSquares = []; // Reset active squares
+  initialiseGame();
+}
+
 console.log(activeSquares);
 console.log(selectedSquares);
+
+initialiseGame();
