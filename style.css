@@ -17,6 +17,7 @@ body {
 .container {
   height: 100%;
   display: flex;
+  margin: 100px;
   width: 100%;
   flex-direction: column;
   justify-content: center;
