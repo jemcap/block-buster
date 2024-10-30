@@ -68,6 +68,12 @@ h5 {
   text-align: center;
   font-size: 60px;
   line-height: 1.6;
+  cursor: pointer;
+  transition: border 0.15s ease-in-out;
+}
+
+.grid-item:hover {
+  border: 3px solid red;
 }
 
 .scores {
@@ -124,4 +130,9 @@ h5 {
   align-items: center;
   gap: 1.2rem;
   text-align: center;
+}
+
+.round,
+.numOfBlocks {
+  font-weight: bold;
 }

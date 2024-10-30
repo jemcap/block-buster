@@ -2,12 +2,14 @@ const displayGrid = document.getElementById("grid");
 const btn = document.getElementById("btn");
 const instructions = document.getElementById("instructions");
 const scores = document.getElementById("scores");
+let scoreCount = document.getElementById("score");
 const round = document.getElementById("round");
 const numOfBlocks = document.getElementById("numOfBlocks");
 const gameOver = document.getElementById("game-over");
 const retryBtn = document.getElementById("retry-btn");
 
 const square = 10;
+let score = 0;
 let squareArr = [];
 let activeSquares = [];
 let selectedSquares = [];
@@ -58,6 +60,7 @@ function initialiseGame() {
     instructions.innerHTML = "";
     scores.style.display = "flex";
     round.textContent = roundNum;
+    scoreCount.textContent = score;
     gameActive = true;
     generateRandomBlock(3);
     btn.remove();
@@ -73,10 +76,16 @@ function compare() {
         });
         console.log("You lose");
         gameOver.style.visibility = "visible";
+        scoreCount.textContent = score;
 
         gameOver.innerHTML = `
         <h2>Game Over</h2>
         <p>You have made it to round ${roundNum}</p>
+        <h3>Hi-Score: <span>${score}</span></h3>
+        <form>
+          <label for="name">Name</label>
+          <input type="text" name="name"/>
+        </form>
         <button id="retry-btn">Retry</button>`;
         let retryBtn = document.getElementById("retry-btn");
         retryBtn.classList.add("retry-btn");
@@ -88,7 +97,10 @@ function compare() {
         return;
       }
     }
-    console.log("You win");
+    selectedSquares.forEach((_, i) => {
+      score += 100;
+    });
+    scoreCount.textContent = score;
     activeSquares.forEach((item) => {
       item.classList.remove("active-block");
       item.style.backgroundColor = "";
