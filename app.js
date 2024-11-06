@@ -1,3 +1,10 @@
+import { db } from "./firebase.js";
+import {
+  getDoc,
+  doc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
 const displayGrid = document.getElementById("grid");
 const btn = document.getElementById("btn");
 const instructions = document.getElementById("instructions");
@@ -6,11 +13,10 @@ const scoreCount = document.getElementById("score");
 const round = document.getElementById("round");
 const numOfBlocks = document.getElementById("numOfBlocks");
 const gameOver = document.getElementById("game-over");
-const retryBtn = document.getElementById("retry-btn");
 
 const square = 10;
 let score = 0;
-let hiscore = localStorage.getItem("hiscore") || 0;
+let hiscore = 0;
 
 let squareArr = [];
 let activeSquares = [];
@@ -36,6 +42,30 @@ for (let i = 0; i < square * square; i++) {
   });
 }
 
+async function saveHighScores(score) {
+  try {
+    await setDoc(doc(db, "scores", "hiscore"), { score });
+    console.log("High Score saved", score);
+  } catch (error) {
+    console.error("Error saving high score: ", error);
+  }
+}
+
+async function getHighScore() {
+  try {
+    const docRef = doc(db, "scores", "hiscore");
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data().score;
+    } else {
+      console.log("No high score found.");
+      return 0;
+    }
+  } catch (e) {
+    console.error("Error retrieving high score: ", e);
+  }
+}
+
 function generateRandomBlock(num) {
   for (let i = 0; i < num && squareArr.length > 0; i++) {
     if (squareArr.length === 0) return;
@@ -57,7 +87,10 @@ function generateRandomBlock(num) {
   }
 }
 
-function initialiseGame() {
+async function initialiseGame() {
+  hiscore = await getHighScore();
+  scoreCount.textContent = score;
+  round.textContent = roundNum;
   btn.addEventListener("click", () => {
     instructions.innerHTML = "";
     scores.style.display = "flex";
@@ -70,7 +103,7 @@ function initialiseGame() {
   });
 }
 
-function compare() {
+async function compare() {
   if (activeSquares.length === selectedSquares.length) {
     for (let i = 0; i < selectedSquares.length; i++) {
       if (!activeSquares.includes(selectedSquares[i])) {
@@ -89,7 +122,7 @@ function compare() {
 
         if (score > hiscore) {
           hiscore = score;
-          localStorage.setItem("hiscore", score);
+          await saveHighScores(hiscore);
           let newHiScore = document.getElementById("new-hiscore");
           newHiScore.classList.add("new-hi-score");
           newHiScore.textContent = "New High Score!";
